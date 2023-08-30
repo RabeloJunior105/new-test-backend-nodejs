@@ -1,12 +1,12 @@
 import express from "express";
 import cors from "cors";
-import router from "./app/shared/http/router";
+import router from "./app/shared/Http/router";
 import AppError from "./app/shared/Error/error.interceptor";
 import { Request, Response } from "express-serve-static-core";
 import { NextFunction } from "connect";
-import { Logger } from "./app/shared/logger/logger.helper";
+import { Logger } from "./app/shared/Logger/logger.helper";
 import dotenv from "dotenv";
-import AppDatabase from "./app/shared/http/database/database";
+import AppDatabase from "./app/shared/Http/database/database";
 
 dotenv.config();
 const app = express();
