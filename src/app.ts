@@ -6,14 +6,12 @@ import { Request, Response } from "express-serve-static-core";
 import { NextFunction } from "connect";
 import { Logger } from "./app/shared/Logger/logger.helper";
 import dotenv from "dotenv";
-import AppDatabase from "./app/shared/Http/database/database";
-
 dotenv.config();
 const app = express();
 
 app.use(cors({ origin: ["http://localhost:3000"] }));
-
-app.use("/", router);
+app.use(express.json());
+app.use(router);
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   if (err instanceof AppError) {
@@ -31,13 +29,6 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   });
 });
 
-AppDatabase.initialize()
-  .then(() => {
-    Logger().info(`Database Started`);
-  })
-  .catch((err) => {
-    Logger().error(`Database Error`, err);
-  });
 
 app.listen(process.env.PORT ?? 3000, () => {
   Logger().info(`Start Server: ${process.env.PORT ?? 3000}`);

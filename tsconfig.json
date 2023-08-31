@@ -6,7 +6,7 @@
             "es6"
         ],
         "allowJs": true,
-        "baseUrl": "./src",
+        "baseUrl": "src/",
         "outDir": "./dist",
         "rootDir": "./",
         "strict": true,
@@ -15,8 +15,13 @@
         "resolveJsonModule": true,
         "paths": {
             "@app/*": [
-                "app/*"
+                "./app/modules/*"
             ],
-        }
-    }
+        },
+        "sourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "strictPropertyInitialization": false,
+    },
+    "include": ["src"]
 }

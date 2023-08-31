@@ -1,8 +1,9 @@
+import { CategoryRoutes } from "@app/Category/category.routes";
 import express from "express";
 
 const router = express.Router();
 
 router.get("/");
-// ADD routes to controllers
+router.use(CategoryRoutes);
 
 export = router;

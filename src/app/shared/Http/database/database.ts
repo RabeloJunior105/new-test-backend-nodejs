@@ -1,16 +1,24 @@
-import { DataSource } from "typeorm";
-import dotenv from "dotenv";
-dotenv.config();
+import { PrismaClient } from "@prisma/client";
 
+const prisma = new PrismaClient();
 
-const AppDatabase = new DataSource({
-  type: "mongodb",
-  synchronize: true,
-  logging: ["query", "error"],
-  entities: ["./src/**/*.entities.ts"],
-  migrations: [],
-  subscribers: [],
-  url: process.env.DATABASE_MONGO_CONN,
-});
+async function main() {
+  const teste = await prisma.category.create({
+    data: {
+      title: "Teste JR",
+      description: "Aaaaa",
+      ownerId: "23134asdf",
+    },
+  });
+  console.log(teste);
+}
 
-export default AppDatabase;
+main()
+  .then(async () => {
+    await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });
