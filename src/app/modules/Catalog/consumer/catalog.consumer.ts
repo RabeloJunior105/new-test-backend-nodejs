@@ -1,4 +1,4 @@
-import { Consumer, ConsumerOptions } from "sqs-consumer";
+import { Consumer } from "sqs-consumer";
 import { SQSClient } from "@aws-sdk/client-sqs";
 
 export const CatalogConsumer = () =>
