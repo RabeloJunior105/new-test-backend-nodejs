@@ -1,24 +1,29 @@
 import { Request } from "express";
 import { Response } from "express-serve-static-core";
-import { CategoryService } from "./category.service";
+import { CategoryService } from "@app/Category/category.service";
+import { container, inject, injectable } from "tsyringe";
+import { CategoryDTO } from "./dto/category.dto";
+import { CreateCategoryDTO } from "./dto/create.dto";
 
 /* import { Category } from "./models/category.model"; */
 
 export class CategoryController {
-  private repository;
-  constructor(private CategoryService: CategoryService) {
-    this.repository = {};
-  }
-
   async create(req: Request, res: Response) {
-/*     console.log("Cheguei no controlelr");
-    const categories = new Category();
-    categories.title = "JR";
-    categories.description = "description JR";
-    categories.ownerId = "123123aadsd";
-     */
-    
-    res.send({ txt: "salve" });
+    try {
+      const { ownerId, title, description }: CreateCategoryDTO = req.body;
+      const categoryService = container.resolve(CategoryService);
+
+      const createCategory = await categoryService.create({
+        title,
+        description,
+        ownerId,
+      });
+
+      res.send(createCategory).status(200);
+    } catch (error) {
+      console.log(error);
+      res.send({ error: error }).status(400);
+    }
   }
   async update(req: Request, res: Response) {}
   async delete(req: Request, res: Response) {}

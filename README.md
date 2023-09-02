@@ -1,63 +1,64 @@
+Teste de candidato a analista de back-end
+Caro desenvolvedor,
+Bem-vindo ao teste de candidato a analista de back-end. Este teste tem como objetivo avaliar seus conhecimentos gerais e velocidade de desenvolvimento. Abaixo, você encontrará os detalhes e requisitos para este teste.
 
-<h1>Backend Analyst Candidate Test</h1>
-Dear developer,
+O desafio
 
-Welcome to the Backend Analyst Candidate Test. This test aims to assess your general knowledge and development speed. Below, you will find the details and requirements for this test.
+Sua tarefa é desenvolver uma API usando Node.js para um sistema de gerenciamento de catálogo de produtos em um aplicativo de mercado. Você deve analisar e converter as seguintes histórias de usuários em rotas para o aplicativo:
 
+Histórias de usuários:
 
-<strong>The Challenge</strong>
+Como usuário, desejo cadastrar um produto junto ao seu proprietário, para futuramente poder acessar seus dados (título, descrição, preço, categoria, ID do proprietário).
 
-Your task is to develop an API using Node.js for a product catalog management system in a marketplace application. You should analyze and convert the following user stories into routes for the application:
+Como usuário, desejo cadastrar uma categoria junto ao seu proprietário, para poder futuramente acessar seus dados (título, descrição, ID do proprietário).
 
-<strong>User Stories:</strong>
+Como usuário, quero associar um produto a uma categoria.
 
-- As a user, I want to register a product with its owner, so that I can access its data in the future (title, description, price, category, owner ID).
-- As a user, I want to register a category with its owner, so that I can access its data in the future (title, description, owner ID).
-- As a user, I want to associate a product with a category.
-- As a user, I want to update the data of a product or category.
-- As a user, I want to delete a product or category from my catalog.
-- A product can only be associated with one category at a time.
-- Assume that products and categories belong only to one owner.
+Como usuário, desejo atualizar os dados de um produto ou categoria.
 
-- Keep in mind that this is an online product catalog, which means there will be multiple requests for editing items/categories per second, as well as accessing the catalog search endpoint.
-- Consider the product catalog as a JSON compilation of all available categories and items owned by a user. This way, the catalog search endpoint does not need to fetch information from the database.
-- Whenever there is a change in the product catalog, publish this change to the "catalog-emit" topic in the AWS SQS service.
-- Implement a consumer that listens to catalog changes for a specific owner.
-- When the consumer receives a message, search the database for that owner's catalog, generate the catalog JSON, and publish it to an AWS S3 service bucket.
+Como usuário, desejo excluir um produto ou categoria do meu catálogo.
 
-<strong>You need to develop this test using the following technologies:</strong>
+Um produto só pode ser associado a uma categoria por vez.
 
-- MongoDB for the database.
-- AWS SQS for the catalog change notifications.
-- AWS S3 for storing the catalog JSON.
-- Node.js for the backend.
-- Express.js as the web framework.
+Suponha que os produtos e categorias pertençam apenas a um proprietário.
 
-<hr>
-<strong>Diagram representing the final structure of the project:</strong> <br><br>
-![image](https://github.com/githubanotaai/new-test-backend-nodejs/assets/52219768/504ba448-f128-41db-ae86-18dc19c0dc9d)
+Lembre-se de que este é um catálogo de produtos online, o que significa que haverá várias solicitações de edição de itens/categorias por segundo, bem como de acesso ao endpoint de pesquisa do catálogo.
 
+Considere o catálogo de produtos como uma compilação JSON de todas as categorias e itens disponíveis de propriedade de um usuário. Dessa forma, o terminal de pesquisa do catálogo não precisa buscar informações no banco de dados.
 
-<hr>
+Sempre que houver uma alteração no catálogo de produtos, publique essa alteração no tópico "catalog-emit" do serviço AWS SQS.
 
-<strong>Instructions</strong>
+Implemente um consumidor que ouça alterações de catálogo para um proprietário específico.
 
-<strong>To begin the test, fork this repository, create a branch with your full name, and send us the link to your completed test (link to your repository). If you only clone the repository, you won't be able to push changes, making the pull request more complicated.</strong>
-- Use your own AWS account to set up the required services.
-- Update the README file with instructions on how to run your application.
-- Paste the branch name into the GUPY system and indicate the completion of the test.
-- Feel free to provide us with feedback regarding the test.
+Quando o consumidor receber uma mensagem, pesquise no banco de dados o catálogo desse proprietário, gere o JSON do catálogo e publique-o em um bucket de serviço AWS S3.
 
-<strong>Our Evaluation Criteria</strong>
-We will assess the following aspects of your solution:
+Você precisa desenvolver este teste usando as seguintes tecnologias:
 
-- Knowledge of JavaScript, Node.js, and Express.js.
-- Proper structure of the application layers.
-- Handling of outgoing calls.
-- Effective use of environment variables.
-- Implementation of unit tests.
-- Logging mechanisms.
-- Error handling strategies.
-- Documentation quality.
-- Code organization, module separation, readability, and comments.
-- Commit history.
+MongoDB para o banco de dados.
+AWS SQS para notificações de alteração de catálogo.
+AWS S3 para armazenar o catálogo JSON.
+Node.js para back-end.
+Express.js como estrutura da web.
+Diagrama representando a estrutura final do projeto:
+
+![image]( https://github.com/githubanotaai/new-test-backend-nodejs/assets/52219768/504ba448-f128-41db-ae86-18dc19c0dc9d )
+Instruções
+
+Para iniciar o teste, bifurque este repositório, crie um branch com seu nome completo e envie-nos o link do seu teste concluído (link para o seu repositório). Se você apenas clonar o repositório, não será possível enviar alterações por push, tornando a solicitação pull mais complicada.
+
+Use sua própria conta AWS para configurar os serviços necessários.
+Atualize o arquivo README com instruções sobre como executar seu aplicativo.
+Cole o nome da filial no sistema GUPY e indique a conclusão do teste.
+Sinta-se à vontade para nos fornecer comentários sobre o teste.
+Nossos critérios de avaliação Avaliaremos os seguintes aspectos da sua solução:
+
+Conhecimento de JavaScript, Node.js e Express.js.
+Estrutura adequada das camadas de aplicação.
+Tratamento de chamadas de saída.
+Uso eficaz de variáveis ​​de ambiente.
+Implementação de testes unitários.
+Mecanismos de registro.
+Estratégias de tratamento de erros.
+Qualidade da documentação.
+Organização do código, separação de módulos, legibilidade e comentários.
+Confirmar histórico.

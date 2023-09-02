@@ -1,6 +1,5 @@
-export class CategoryDTO {
-  id: string;
+export class CreateCategoryDTO {
   title?: string;
   description?: string;
-  ownerId?: string;
+  ownerId: string;
 }

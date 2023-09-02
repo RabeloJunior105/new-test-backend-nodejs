@@ -1,7 +1,10 @@
 {
     "compilerOptions": {
-        "target": "ES2016",
+        "target": "es2016",
         "module": "commonjs",
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "skipLibCheck": true,
         "lib": [
             "es6"
         ],
@@ -9,7 +12,6 @@
         "baseUrl": "src/",
         "outDir": "./dist",
         "rootDir": "./",
-        "strict": true,
         "noImplicitAny": true,
         "esModuleInterop": true,
         "resolveJsonModule": true,
@@ -22,6 +24,5 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "strictPropertyInitialization": false,
-    },
-    "include": ["src"]
+    }
 }

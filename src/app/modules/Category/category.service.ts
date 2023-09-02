@@ -1,12 +1,22 @@
-import { Request } from "express";
-import { Response } from "express-serve-static-core";
 import { CategoryRepository } from "./category.repository";
+import AppError from "app/shared/Error/error.interceptor";
+import { Logger } from "app/shared/Logger/logger.helper";
+import { container, inject, injectable } from "tsyringe";
+import { CategoryDTO } from "./dto/category.dto";
+import { CreateCategoryDTO } from "./dto/create.dto";
 
+@injectable()
 export class CategoryService {
-  constructor(private CategoryRepository: CategoryRepository) {}
+  async create(data: CreateCategoryDTO) {
+    try {
+      const repository = container.resolve(CategoryRepository);
+      
+      const createCategory = await repository.create(data);
 
-  async create() {
-    console.log("create")
+      return createCategory;
+    } catch (err: any) {
+      throw new AppError(err.message ?? "Não foi possivel finalizar seu cadastro", err.statusCode ?? 400);
+    }
   }
   async update() {}
   async delete() {}

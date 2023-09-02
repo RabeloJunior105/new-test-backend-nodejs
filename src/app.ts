@@ -1,4 +1,5 @@
 import express from "express";
+import "reflect-metadata";
 import cors from "cors";
 import router from "./app/shared/Http/router";
 import AppError from "./app/shared/Error/error.interceptor";
@@ -6,6 +7,7 @@ import { Request, Response } from "express-serve-static-core";
 import { NextFunction } from "connect";
 import { Logger } from "./app/shared/Logger/logger.helper";
 import dotenv from "dotenv";
+import { PrismaClient } from "@prisma/client";
 dotenv.config();
 const app = express();
 
@@ -28,7 +30,6 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
     message: "Internal server error",
   });
 });
-
 
 app.listen(process.env.PORT ?? 3000, () => {
   Logger().info(`Start Server: ${process.env.PORT ?? 3000}`);
