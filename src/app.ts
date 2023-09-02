@@ -7,7 +7,9 @@ import { Request, Response } from "express-serve-static-core";
 import { NextFunction } from "connect";
 import { Logger } from "./app/shared/Logger/logger.helper";
 import dotenv from "dotenv";
-import { PrismaClient } from "@prisma/client";
+import { Consumer } from "sqs-consumer";
+import { SQSClient } from "@aws-sdk/client-sqs";
+import { CatalogConsumer } from "@app/Catalog/consumer/catalog.consumer";
 dotenv.config();
 const app = express();
 
@@ -31,6 +33,7 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   });
 });
 
+CatalogConsumer().start();
 app.listen(process.env.PORT ?? 3000, () => {
   Logger().info(`Start Server: ${process.env.PORT ?? 3000}`);
 });

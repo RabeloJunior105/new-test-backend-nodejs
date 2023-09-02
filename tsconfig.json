@@ -19,6 +19,9 @@
             "@app/*": [
                 "./app/modules/*"
             ],
+            "@shared/*": [
+                "./app/shared/*"
+            ],
         },
         "sourceMap": true,
         "emitDecoratorMetadata": true,

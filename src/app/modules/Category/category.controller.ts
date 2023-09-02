@@ -4,13 +4,14 @@ import { CategoryService } from "@app/Category/category.service";
 import { container, inject, injectable } from "tsyringe";
 import { CategoryDTO } from "./dto/category.dto";
 import { CreateCategoryDTO } from "./dto/create.dto";
-
-/* import { Category } from "./models/category.model"; */
+import { SystemQueue } from "@shared/AWS/sqs/sqs";
 
 export class CategoryController {
   async create(req: Request, res: Response) {
     try {
-      const { ownerId, title, description }: CreateCategoryDTO = req.body;
+      const systemQueue = new SystemQueue();
+      await systemQueue.addMessageQueue("message to body");
+      /*       const { ownerId, title, description }: CreateCategoryDTO = req.body;
       const categoryService = container.resolve(CategoryService);
 
       const createCategory = await categoryService.create({
@@ -19,7 +20,8 @@ export class CategoryController {
         ownerId,
       });
 
-      res.send(createCategory).status(200);
+      */
+      res.send("createCategory").status(200); 
     } catch (error) {
       console.log(error);
       res.send({ error: error }).status(400);

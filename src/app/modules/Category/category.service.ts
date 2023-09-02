@@ -10,12 +10,15 @@ export class CategoryService {
   async create(data: CreateCategoryDTO) {
     try {
       const repository = container.resolve(CategoryRepository);
-      
+
       const createCategory = await repository.create(data);
 
       return createCategory;
     } catch (err: any) {
-      throw new AppError(err.message ?? "Não foi possivel finalizar seu cadastro", err.statusCode ?? 400);
+      throw new AppError(
+        err.message ?? "Não foi possivel finalizar seu cadastro",
+        err.statusCode ?? 400
+      );
     }
   }
   async update() {}
