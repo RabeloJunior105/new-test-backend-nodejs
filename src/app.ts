@@ -7,14 +7,20 @@ import { Request, Response } from "express-serve-static-core";
 import { NextFunction } from "connect";
 import { Logger } from "./app/shared/Logger/logger.helper";
 import dotenv from "dotenv";
-import { Consumer } from "sqs-consumer";
-import { SQSClient } from "@aws-sdk/client-sqs";
 import { CatalogConsumer } from "@app/Catalog/consumer/catalog.consumer";
+import bodyParser from "body-parser";
+
 dotenv.config();
 const app = express();
 
 app.use(cors({ origin: ["http://localhost:3000"] }));
 app.use(express.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
 app.use(router);
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {

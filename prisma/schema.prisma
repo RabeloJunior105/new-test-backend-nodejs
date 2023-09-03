@@ -11,13 +11,13 @@ datasource db {
 }
 
 model Category {
-  id          String    @id @default(uuid()) @map("_id")
+  id          String   @id @default(uuid()) @map("_id")
   title       String?
   description String?
   ownerId     String
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  deletedAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  isDeleted   Boolean? @default(false)
 
   @@map("category")
 }

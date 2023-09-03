@@ -5,5 +5,5 @@ export class CategoryDTO {
   ownerId: string;
   createdAt?: Date;
   updatedAt?: Date;
-  deletedAt?: Date;
+  isDeleted?: Boolean;
 }
