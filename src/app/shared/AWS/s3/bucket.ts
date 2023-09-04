@@ -36,6 +36,6 @@ export class StorageBucket {
     const getFile = await this.S3Bucket.send(command);
     const transformFile = await getFile.Body?.transformToString();
 
-    return { data: JSON.parse(String(transformFile)) };
+    return JSON.parse(String(transformFile));
   }
 }

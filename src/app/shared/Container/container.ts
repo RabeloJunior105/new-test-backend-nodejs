@@ -1,3 +1,4 @@
+import { CatalogService } from "@app/Catalog/catalog.service";
 import { CategoryRepository } from "@app/Category/category.repository";
 import { CategoryService } from "@app/Category/category.service";
 import { ProductRepository } from "@app/Product/product.repository";
@@ -26,3 +27,5 @@ container.registerSingleton<ProductRepository>(
 );
 
 container.registerSingleton<QueueService>("QueueService", QueueService);
+
+container.registerSingleton<CatalogService>("CatalogService", CatalogService);

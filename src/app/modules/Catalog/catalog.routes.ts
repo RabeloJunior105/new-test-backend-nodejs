@@ -5,4 +5,4 @@ export const CatalogRoutes = Router();
 
 const catalogController = new CatalogController();
 
-
+CatalogRoutes.get("/catalog/:ownerId", catalogController.search);
