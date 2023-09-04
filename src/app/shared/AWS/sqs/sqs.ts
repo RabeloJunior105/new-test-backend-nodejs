@@ -2,7 +2,7 @@ import AppError from "@shared/Error/error.interceptor";
 import { Logger } from "@shared/Logger/logger.helper";
 import { SQS } from "@aws-sdk/client-sqs";
 import { Consumer } from "sqs-consumer";
-export class SystemQueue {
+export class QueueService {
   private readonly sqs: SQS;
   constructor() {
     this.sqs = new SQS({
