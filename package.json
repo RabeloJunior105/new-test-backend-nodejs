@@ -5,8 +5,9 @@
   "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "start:dev": "nodemon"
+    "models": "npx prisma generate",
+    "build": "tsc && npm run models",
+    "start": "nodemon"
   },
   "keywords": [],
   "author": "",
