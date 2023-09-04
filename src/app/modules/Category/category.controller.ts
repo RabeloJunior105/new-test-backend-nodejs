@@ -4,7 +4,6 @@ import { CategoryService } from "@app/Category/category.service";
 import { container, inject, injectable } from "tsyringe";
 import { CategoryDTO } from "./dto/category.dto";
 import { CreateCategoryDTO } from "./dto/create.dto";
-import { SystemQueue } from "@shared/AWS/sqs/sqs";
 import AppError from "@shared/Error/error.interceptor";
 
 @injectable()

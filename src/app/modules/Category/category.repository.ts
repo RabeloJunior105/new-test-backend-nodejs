@@ -19,10 +19,16 @@ export class CategoryRepository {
             ownerId,
             isDeleted: false,
           },
+          include: {
+            Product: true,
+          },
         })
       : await this.category.findMany({
           where: {
             isDeleted: false,
+          },
+          include: {
+            Product: true,
           },
         });
   }

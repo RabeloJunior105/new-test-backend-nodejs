@@ -6,6 +6,7 @@ import { CategoryDTO } from "./dto/category.dto";
 import { CreateCategoryDTO } from "./dto/create.dto";
 import { UpdateCategoryDTO } from "./dto/update.dto";
 import { Nullable } from "./Interfaces/iNullableString.interface";
+import { QueueService } from "@shared/AWS/sqs/sqs";
 
 @injectable()
 export class CategoryService {
@@ -37,11 +38,12 @@ export class CategoryService {
   async create(data: CreateCategoryDTO) {
     try {
       const repository = container.resolve(CategoryRepository);
-
+      const queueService = container.resolve(QueueService);
       if (!data.ownerId) throw new AppError("Owner Id required");
 
       const createCategory = await repository.create(data);
 
+      queueService.addMessageQueue(data.ownerId);
       return createCategory;
     } catch (err: any) {
       throw new AppError(err.message, err.statusCode);
@@ -50,11 +52,15 @@ export class CategoryService {
   async update(id: string, data: UpdateCategoryDTO) {
     try {
       const repository = container.resolve(CategoryRepository);
+      const queueService = container.resolve(QueueService);
 
       if (!data.ownerId)
         throw new AppError("changing category owner is not allowed");
 
-      return await repository.update(id, data);
+      const updateCategory = await repository.update(id, data);
+      queueService.addMessageQueue(data.ownerId);
+
+      return updateCategory;
     } catch (err: any) {
       throw new AppError(err.message, err.statusCode);
     }
@@ -63,11 +69,13 @@ export class CategoryService {
   async delete(id: string) {
     try {
       const repository = container.resolve(CategoryRepository);
-
+      const queueService = container.resolve(QueueService);
       const findCategory = await repository.findById(id);
 
       if (!findCategory) throw new AppError("Category not exists", 404);
       await repository.delete(id);
+
+      queueService.addMessageQueue(findCategory.ownerId);
       return {
         category: { message: "The category has been successfully deleted" },
       };
