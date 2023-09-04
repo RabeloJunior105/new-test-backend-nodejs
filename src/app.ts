@@ -9,6 +9,7 @@ import { Logger } from "./app/shared/Logger/logger.helper";
 import dotenv from "dotenv";
 import { CatalogConsumer } from "@app/Catalog/consumer/catalog.consumer";
 import bodyParser from "body-parser";
+import SwaggerUi from "swagger-ui-express";
 
 dotenv.config();
 const app = express();

@@ -4,6 +4,7 @@ import { ProductCreateDTO } from "./dto/create.dto";
 import { ProductRepository } from "./product.repository";
 import { CategoryService } from "@app/Category/category.service";
 import { QueueService } from "@shared/AWS/sqs/sqs";
+import { ProductUpdateDTO } from "./dto/update.dto";
 
 @injectable()
 export class ProductService {
@@ -36,7 +37,7 @@ export class ProductService {
       throw new AppError(error.message, error.statusCode);
     }
   }
-  async update(id: string, data: ProductCreateDTO) {
+  async update(id: string, data: ProductUpdateDTO) {
     try {
       const repository = container.resolve(ProductRepository);
       const queueService = container.resolve(QueueService);

@@ -2,8 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { container, injectable } from "tsyringe";
 import { ProductService } from "./product.service";
 import { ProductCreateDTO } from "./dto/create.dto";
-import { error } from "console";
-import AppError from "@shared/Error/error.interceptor";
+
 
 @injectable()
 export class ProductController {
