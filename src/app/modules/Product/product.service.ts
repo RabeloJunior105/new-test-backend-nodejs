@@ -3,6 +3,7 @@ import { container, injectable } from "tsyringe";
 import { ProductCreateDTO } from "./dto/create.dto";
 import { ProductRepository } from "./product.repository";
 import { CategoryService } from "@app/Category/category.service";
+import { QueueService } from "@shared/AWS/sqs/sqs";
 
 @injectable()
 export class ProductService {
@@ -21,11 +22,14 @@ export class ProductService {
     try {
       const repository = container.resolve(ProductRepository);
       const categoryService = container.resolve(CategoryService);
+      const queueService = container.resolve(QueueService);
       const findCategory = await categoryService.findById(data.categoryId);
 
       if (!findCategory) throw new AppError("Category not exits", 404);
 
       const products = await repository.create(data);
+
+      queueService.addMessageQueue(products.ownerId);
 
       return products;
     } catch (error: any) {
@@ -35,11 +39,15 @@ export class ProductService {
   async update(id: string, data: ProductCreateDTO) {
     try {
       const repository = container.resolve(ProductRepository);
+      const queueService = container.resolve(QueueService);
       const findProduct = await repository.findById(id);
 
       if (!findProduct) throw new AppError("Product not exits", 404);
 
-      return await repository.update(id, data);
+      const updateProduct = await repository.update(id, data);
+      queueService.addMessageQueue(updateProduct.ownerId);
+
+      return updateProduct;
     } catch (error: any) {
       throw new AppError(error.message, error.statusCode);
     }
@@ -47,9 +55,16 @@ export class ProductService {
   async delete(id: string) {
     try {
       const repository = container.resolve(ProductRepository);
+      const queueService = container.resolve(QueueService);
+
       const findProduct = await repository.findById(id);
+
       if (!findProduct) throw new AppError("Product not exits", 404);
+
       const deleteProduct = await repository.delete(id);
+      
+      queueService.addMessageQueue(deleteProduct.ownerId);
+
       return deleteProduct
         ? { message: "Product delete with succesfuly" }
         : { message: "Product not delete" };

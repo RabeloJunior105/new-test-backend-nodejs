@@ -2,6 +2,7 @@ import { CategoryRepository } from "@app/Category/category.repository";
 import { CategoryService } from "@app/Category/category.service";
 import { ProductRepository } from "@app/Product/product.repository";
 import { ProductService } from "@app/Product/product.service";
+import { QueueService } from "@shared/AWS/sqs/sqs";
 import { container } from "tsyringe";
 
 //Register Singleton Module Category
@@ -23,3 +24,5 @@ container.registerSingleton<ProductRepository>(
   "ProductRepository",
   ProductRepository
 );
+
+container.registerSingleton<QueueService>("QueueService", QueueService);

@@ -37,5 +37,3 @@ model Product {
 
   @@map("product")
 }
-
-//title, description, price, category_id, ownerId
